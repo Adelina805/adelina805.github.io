@@ -45,9 +45,10 @@ h1,
   font-size: 0.875rem;
 }
 
-.note {
+.note,
+.socials a {
   margin: 0;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .note a {
@@ -76,10 +77,6 @@ footer {
   font-size: 0.938rem;
 }
 
-.socials a {
-  opacity: 0.7;
-}
-
 .socials a:hover {
   opacity: 1;
   text-decoration: underline;
@@ -89,6 +86,7 @@ h1 {
   margin: 0;
   text-align: center;
   font-size: 2rem;
+  line-height: 1.5;
 }
 
 .roles {
@@ -110,7 +108,7 @@ h1 {
   grid-template-areas: "thumb main links tags";
   gap: 1rem;
   align-items: start;
-  padding: 1rem 0;
+  padding: 1.25rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   overflow: visible;
 }
@@ -249,7 +247,8 @@ h1 {
       "links"
       "tags";
     gap: 0.625rem;
-    padding: 1rem 0;
+    padding: 1.25rem 0;
+    padding-bottom: 3rem;
   }
 
   .thumbnail {
