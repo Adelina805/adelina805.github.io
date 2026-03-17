@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: Georgia, serif;
+  font-family: system-ui, sans-serif;
   background-color: #eef3fb;
   background-image:
     linear-gradient(rgba(250, 252, 255, 0.3), rgba(250, 252, 255, 0.3)),
@@ -14,6 +14,16 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #111;
+}
+h1,
+.roles {
+  font-family: Georgia, serif;
+}
+
+:root {
+  --project-main-col: 300px;
+  --project-links-col: 200px;
+  --project-tags-col: 260px;
 }
 
 .page {
@@ -32,11 +42,11 @@ body {
   gap: 1rem;
   align-items: start;
   margin-bottom: 2.5rem;
+  font-size: 0.875rem;
 }
 
 .note {
   margin: 0;
-  font-size: 0.875rem;
   opacity: 0.7;
 }
 
@@ -44,13 +54,21 @@ body {
   display: flex;
   gap: 0.875rem;
   flex-wrap: wrap;
-  opacity: 0.7;
 }
 
 .socials a,
 .project-links a {
   color: inherit;
   text-decoration: none;
+}
+
+.socials a {
+  opacity: 0.7;
+}
+
+.socials a:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
 
 h1 {
@@ -67,26 +85,39 @@ h1 {
 
 .projects {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: visible;
 }
 
 .project {
   display: grid;
-  grid-template-columns: 120px 1.6fr auto auto;
+  grid-template-columns:
+    124px minmax(0, var(--project-main-col)) minmax(0, var(--project-links-col))
+    minmax(0, 1fr);
+  grid-template-areas: "thumb main links tags";
   gap: 1rem;
   align-items: center;
-  padding: 1.25rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: visible;
 }
 
 .thumbnail {
-  width: 120px;
-  height: 90px;
+  grid-area: thumb;
+  width: 124px;
+  height: 70px;
   border: 1px solid rgba(0, 0, 0, 0.4);
   background: #ddd;
 }
 
+.project-main {
+  grid-area: main;
+  min-width: 0;
+  margin-top: 0.5rem;
+  margin-bottom: auto;
+}
+
 .project h2 {
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
   font-size: 1rem;
 }
 
@@ -97,44 +128,67 @@ h1 {
 }
 
 .project-links {
+  grid-area: links;
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+  justify-content: start;
+  justify-self: stretch;
+  min-width: 0;
 }
 
 .project-links a {
   padding: 0.4rem 0.8rem;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 999px;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  transform-origin: center;
+}
+
+.project-links a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
 }
 
 .project-tags {
+  grid-area: tags;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.625rem;
   flex-wrap: wrap;
   justify-content: end;
+  justify-self: end;
+  min-width: 0;
 }
 
 .project-tags span {
   border: 1px solid rgba(0, 0, 0, 0.25);
   padding: 0.35rem 0.6rem;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 @media (max-width: 900px) {
   .project {
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 124px minmax(240px, 1fr) auto;
+    grid-template-areas:
+      "thumb main links"
+      "thumb main tags";
   }
 
-  .project-links,
+  .project-links {
+    justify-content: flex-end;
+    justify-self: end;
+  }
+
   .project-tags {
-    grid-column: 2;
-    justify-content: start;
+    justify-content: end;
+    justify-self: end;
   }
 
-  .thumb {
-    width: 100px;
-    height: 76px;
+  .thumbnail {
+    width: 124px;
+    height: 70px;
   }
 }
 
@@ -144,18 +198,26 @@ h1 {
   }
 
   .project {
-    grid-template-columns: 1fr;
+    grid-template-columns: 124px minmax(0, 1fr);
+    grid-template-areas:
+      "thumb main"
+      "thumb links"
+      "tags   tags";
+    align-items: start;
   }
 
-  .thumb,
-  .project-links,
+  .thumbnail {
+    width: 124px;
+    height: 70px;
+  }
+
+  .project-links {
+    justify-content: flex-end;
+    justify-self: end;
+  }
+
   .project-tags {
-    grid-column: auto;
-  }
-
-  .thumb {
-    width: 100%;
-    max-width: 180px;
-    height: 120px;
+    justify-content: flex-end;
+    justify-self: stretch;
   }
 }
