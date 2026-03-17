@@ -202,7 +202,7 @@ h1 {
      Left  — thumbnail + project text, side by side, spanning both rows
      Right — project links (top) and project tags (bottom), both right-aligned
    ─────────────────────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 880px) {
   .project {
     grid-template-columns: 124px 1fr auto;
     grid-template-rows: auto auto;
