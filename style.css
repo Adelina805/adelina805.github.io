@@ -29,7 +29,7 @@ h1,
 .page {
   width: min(1100px, 92%);
   margin: 0 auto;
-  padding: 2rem 0 5rem;
+  padding: 2rem 0 10rem;
 }
 
 .site-header {
@@ -96,7 +96,7 @@ h1 {
     minmax(0, 1fr);
   grid-template-areas: "thumb main links tags";
   gap: 1rem;
-  align-items: center;
+  align-items: start;
   padding: 1rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   overflow: visible;
@@ -108,6 +108,8 @@ h1 {
   height: 70px;
   border: 1px solid rgba(0, 0, 0, 0.4);
   background: #ddd;
+  object-fit: cover;
+  display: block;
 }
 
 .project-main {
@@ -136,11 +138,12 @@ h1 {
   justify-content: start;
   justify-self: stretch;
   min-width: 0;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .project-links a {
   display: inline-flex;
-  align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 0.8rem;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -152,8 +155,8 @@ h1 {
 }
 
 .project-links a:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.01);
 }
 
 .link-icon {
@@ -173,10 +176,12 @@ h1 {
   justify-content: end;
   justify-self: end;
   min-width: 0;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .project-tags span {
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0.35rem 0.6rem;
   font-size: 0.875rem;
 }
@@ -194,7 +199,6 @@ h1 {
       "thumb main links"
       "thumb main tags";
     gap: 0.5rem 1rem;
-    align-items: start;
   }
 
   .project-main {
@@ -231,7 +235,6 @@ h1 {
       "main"
       "links"
       "tags";
-    align-items: start;
     gap: 0.625rem;
     padding: 1rem 0;
   }
