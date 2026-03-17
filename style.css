@@ -21,15 +21,15 @@ h1,
 }
 
 :root {
-  --project-main-col: 300px;
-  --project-links-col: 300px;
+  --project-main-col: 280px;
+  --project-links-col: 250px;
   --project-tags-col: 400px;
 }
 
 .page {
   width: min(1100px, 92%);
   margin: 0 auto;
-  padding: 2rem 0 4rem;
+  padding: 2rem 0 5rem;
 }
 
 .site-header {
@@ -181,56 +181,88 @@ h1 {
   font-size: 0.875rem;
 }
 
+/* ─── Tablet ────────────────────────────────────────────
+   Two-column layout:
+     Left  — thumbnail + project text, side by side, spanning both rows
+     Right — project links (top) and project tags (bottom), both right-aligned
+   ─────────────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .project {
-    grid-template-columns: 124px minmax(240px, 1fr) auto;
+    grid-template-columns: 124px 1fr auto;
+    grid-template-rows: auto auto;
     grid-template-areas:
       "thumb main links"
       "thumb main tags";
+    gap: 0.5rem 1rem;
+    align-items: start;
+  }
+
+  .project-main {
+    align-self: start;
   }
 
   .project-links {
-    justify-content: flex-end;
     justify-self: end;
+    justify-content: flex-end;
+    align-self: end;
   }
 
   .project-tags {
-    justify-content: end;
     justify-self: end;
-  }
-
-  .thumbnail {
-    width: 124px;
-    height: 70px;
+    justify-content: flex-end;
+    align-self: start;
   }
 }
 
-@media (max-width: 640px) {
+/* ─── Mobile stacked layout ───────────────────────────────────
+   Single-column stack per project.  All four pieces read top-to-bottom:
+   thumbnail → text → links → tags.  Projects keep the same divider lines
+   as desktop.  Header nav stacks here too.
+   ─────────────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
   .header-top {
     flex-direction: column;
   }
 
   .project {
-    grid-template-columns: 124px minmax(0, 1fr);
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "thumb main"
-      "thumb links"
-      "tags   tags";
+      "thumb"
+      "main"
+      "links"
+      "tags";
     align-items: start;
+    gap: 0.625rem;
+    padding: 1rem 0;
   }
 
   .thumbnail {
-    width: 124px;
-    height: 70px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .project-main {
+    margin: 0;
+  }
+
+  .project h2 {
+    margin: 0 0 0.35rem;
   }
 
   .project-links {
-    justify-content: flex-end;
-    justify-self: end;
+    justify-content: flex-start;
+    justify-self: start;
+    gap: 0.5rem;
+  }
+
+  .project-links a {
+    padding: 0.3rem 0.6rem;
   }
 
   .project-tags {
-    justify-content: flex-end;
-    justify-self: stretch;
+    justify-content: flex-start;
+    justify-self: start;
+    gap: 0.5rem;
   }
 }

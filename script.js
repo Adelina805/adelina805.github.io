@@ -1,6 +1,6 @@
 const iconMap = [
   {
-    matcher: /\bwebsite\b|\bdevpost\b|\bitch.io\b|\bproject\s*page\b/,
+    matcher: /\bwebsite\b|\bdevpost\b|\bitch.io\b|\bproject\b/,
     iconId: "icon-live-link",
   },
   { matcher: /\bmockup\b|\bdesign\b/, iconId: "icon-mockup" },
