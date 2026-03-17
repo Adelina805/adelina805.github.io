@@ -39,6 +39,7 @@ body {
 h1,
 .roles {
   font-family: Georgia, serif;
+  text-align: center;
 }
 
 .page {
@@ -90,7 +91,6 @@ footer {
 .project-links a {
   color: inherit;
   text-decoration: none;
-  font-size: 0.938rem;
 }
 
 .socials a:hover {
@@ -152,16 +152,11 @@ body.dark .icon-sun {
 }
 
 h1 {
-  margin: 0;
-  text-align: center;
-  font-size: 2rem;
-  line-height: 1.5;
+  font-size: clamp(1.6rem, 4vw, 2rem);
 }
 
 .roles {
-  text-align: center;
-  font-size: 1.25rem;
-  margin-top: 1rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
 }
 
 .projects {
@@ -201,13 +196,13 @@ h1 {
 
 .project h2 {
   margin: 0 0 1rem;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 1.2vw, 1rem);
 }
 
 .project-main p {
   margin: 0;
   text-transform: uppercase;
-  font-size: 0.938rem;
+  font-size: clamp(0.85rem, 1vw, 0.938rem);
 }
 
 .project-links {
@@ -228,6 +223,7 @@ h1 {
   padding: 0.4rem 0.8rem;
   border: 1px solid var(--border-medium);
   border-radius: 999px;
+  font-size: clamp(0.875rem, 0.8vw, 0.9375rem);
   transition:
     background-color 0.2s ease,
     transform 0.2s ease;
@@ -263,7 +259,7 @@ h1 {
 .project-tags span {
   border: 1px solid var(--border-soft);
   padding: 0.35rem 0.6rem;
-  font-size: 0.875rem;
+  font-size: clamp(0.813rem, 1.2vw, 0.875rem);
 }
 
 /* ─── Tablet ────────────────────────────────────────────
@@ -321,32 +317,24 @@ h1 {
   }
 
   .mobile-menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 0.75rem;
     margin: 0 0 1.25rem;
     padding: 0.875rem 0;
     border-top: 1px solid var(--border-soft);
     border-bottom: 1px solid var(--border-soft);
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
   }
 
   .mobile-menu.is-open {
-    max-height: 600px;
-    opacity: 1;
-    pointer-events: auto;
+    display: flex;
   }
 
   .mobile-menu a,
-  .mobile-menu-note,
-  .mobile-menu-future {
+  .mobile-menu-note {
     color: inherit;
     text-decoration: none;
-    font-size: 0.938rem;
+    font-size: 0.875rem;
     opacity: 0.6;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border-soft);
@@ -355,10 +343,6 @@ h1 {
   .mobile-menu a:hover {
     opacity: 1;
     text-decoration: underline;
-  }
-
-  .mobile-menu-future {
-    opacity: 0.45;
   }
 
   .mobile-menu :last-child {
@@ -393,7 +377,7 @@ h1 {
   }
 
   .project-main {
-    margin: 0;
+    gap: 1rem;
   }
 
   .project h2 {
@@ -406,13 +390,8 @@ h1 {
     gap: 0.5rem;
   }
 
-  .project-links a {
-    padding: 0.3rem 0.6rem;
-  }
-
   .project-tags {
     justify-content: flex-start;
     justify-self: start;
-    gap: 0.5rem;
   }
 }
