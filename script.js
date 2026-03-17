@@ -80,7 +80,80 @@ function attachIcons() {
   }
 }
 
+// Handles body class, icon swap, and persistent label updates for both theme toggle buttons.
+function setupThemeToggle() {
+  const toggles = document.querySelectorAll(".theme-toggle");
+  if (!toggles.length) {
+    return;
+  }
+
+  const storageKey = "portfolio-theme";
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const savedTheme = localStorage.getItem(storageKey);
+  const initialDark = savedTheme ? savedTheme === "dark" : prefersDark;
+
+  document.body.classList.toggle("dark", initialDark);
+  updateThemeToggleLabels(initialDark, toggles);
+
+  for (const toggle of toggles) {
+    toggle.addEventListener("click", () => {
+      const nowDark = !document.body.classList.contains("dark");
+      document.body.classList.toggle("dark", nowDark);
+      localStorage.setItem(storageKey, nowDark ? "dark" : "light");
+      updateThemeToggleLabels(nowDark, toggles);
+    });
+  }
+}
+
+function updateThemeToggleLabels(isDark, toggles) {
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+  for (const toggle of toggles) {
+    toggle.setAttribute("aria-label", label);
+    toggle.setAttribute("title", label);
+  }
+}
+
+// Mobile menu opens a simple vertical nav and closes on link click or viewport change.
+function setupMobileMenu() {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  if (!menuToggle || !mobileMenu) {
+    return;
+  }
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("is-open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close mobile menu" : "Open mobile menu",
+    );
+    menuToggle.setAttribute("title", isOpen ? "Close menu" : "Open menu");
+  });
+
+  for (const link of mobileMenu.querySelectorAll("a")) {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open mobile menu");
+      menuToggle.setAttribute("title", "Open menu");
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 600 && mobileMenu.classList.contains("is-open")) {
+      mobileMenu.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open mobile menu");
+      menuToggle.setAttribute("title", "Open menu");
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   ensureIconSprite();
   attachIcons();
+  setupThemeToggle();
+  setupMobileMenu();
 });

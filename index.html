@@ -20,8 +20,81 @@
                     <a href="https://www.linkedin.com/in/adelina-martinez/" target="_blank"
                         rel="noopener noreferrer">LinkedIn</a>
                     <a href="https://github.com/adelina805" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <!-- Desktop utility toggle: appears as the last item in the nav row. -->
+                    <button class="theme-toggle desktop-theme-toggle" type="button" aria-label="Switch to dark mode"
+                        title="Toggle theme">
+                        <span class="theme-toggle-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="utility-icon icon-moon">
+                                <path
+                                    d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="utility-icon icon-sun">
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M12 2v2" />
+                                <path d="M12 20v2" />
+                                <path d="m4.93 4.93 1.41 1.41" />
+                                <path d="m17.66 17.66 1.41 1.41" />
+                                <path d="M2 12h2" />
+                                <path d="M20 12h2" />
+                                <path d="m6.34 17.66-1.41 1.41" />
+                                <path d="m19.07 4.93-1.41 1.41" />
+                            </svg>
+                        </span>
+                    </button>
                 </nav>
             </div>
+
+            <!-- Mobile controls keep utility actions in one clean row. -->
+            <div class="mobile-controls" aria-label="Mobile header controls">
+                <button class="theme-toggle mobile-theme-toggle" type="button" aria-label="Switch to dark mode"
+                    title="Toggle theme">
+                    <span class="theme-toggle-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="utility-icon icon-moon">
+                            <path
+                                d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="utility-icon icon-sun">
+                            <circle cx="12" cy="12" r="4" />
+                            <path d="M12 2v2" />
+                            <path d="M12 20v2" />
+                            <path d="m4.93 4.93 1.41 1.41" />
+                            <path d="m17.66 17.66 1.41 1.41" />
+                            <path d="M2 12h2" />
+                            <path d="M20 12h2" />
+                            <path d="m6.34 17.66-1.41 1.41" />
+                            <path d="m19.07 4.93-1.41 1.41" />
+                        </svg>
+                    </span>
+                </button>
+
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"
+                    aria-label="Open mobile menu" title="Open menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="utility-icon icon-menu" aria-hidden="true">
+                        <path d="M4 5h16" />
+                        <path d="M4 12h16" />
+                        <path d="M4 19h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation">
+                <span class="mobile-menu-note">A portfolio and archive of my work.</span>
+                <a href="mailto:adelina.martinez805@gmail.com">Email</a>
+                <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+                <a href="https://www.linkedin.com/in/adelina-martinez/" target="_blank"
+                    rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/adelina805" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </nav>
 
             <h1>Adelina Martinez</h1>
             <p class="roles">Student • Designer • Developer</p>
