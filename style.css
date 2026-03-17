@@ -7,7 +7,7 @@ body {
   font-family: system-ui, sans-serif;
   background-color: #eef3fb;
   background-image:
-    linear-gradient(rgba(250, 252, 255, 0.3), rgba(250, 252, 255, 0.3)),
+    linear-gradient(rgb(159, 197, 255, 0.3), rgba(159, 197, 255, 0.3)),
     url("images/background.webp");
   background-position: center;
   background-size: cover;
@@ -22,8 +22,8 @@ h1,
 
 :root {
   --project-main-col: 300px;
-  --project-links-col: 200px;
-  --project-tags-col: 260px;
+  --project-links-col: 300px;
+  --project-tags-col: 400px;
 }
 
 .page {
@@ -60,6 +60,7 @@ h1,
 .project-links a {
   color: inherit;
   text-decoration: none;
+  font-size: 0.938rem;
 }
 
 .socials a {
@@ -74,7 +75,7 @@ h1,
 h1 {
   margin: 0;
   text-align: center;
-  font-size: 2.25rem;
+  font-size: 2rem;
 }
 
 .roles {
@@ -138,6 +139,9 @@ h1 {
 }
 
 .project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.4rem 0.8rem;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 999px;
@@ -150,6 +154,15 @@ h1 {
 .project-links a:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.05);
+}
+
+.link-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  stroke-width: 2;
+  vertical-align: middle;
 }
 
 .project-tags {
