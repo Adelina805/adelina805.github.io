@@ -6,7 +6,7 @@ const iconMap = [
   { matcher: /\bmockup\b|\bdesign\b/, iconId: "icon-mockup" },
   { matcher: /\brepository\b|\bcode\b/, iconId: "icon-repository" },
   {
-    matcher: /\bcase\s*study\b|\bwriting\b|\bread\s*post\b|\bsee\s*more\b/,
+    matcher: /\bcase\s*study\b|\bwriting\b|\bread\s*post\b|\b/,
     iconId: "icon-case-study",
   },
 ];
