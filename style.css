@@ -160,6 +160,119 @@ h1 {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
 }
 
+.featured {
+  margin-top: 0;
+}
+
+.archive {
+  margin-top: 4rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+}
+
+.section-label {
+  margin: 0;
+  opacity: 0.6;
+  font-size: 0.875rem;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 400;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.featured-project {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  padding: 1.25rem 0 1.5rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+.featured-thumbnail {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border-strong);
+  background: #ddd;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-content {
+  display: grid;
+  gap: 0.875rem;
+}
+
+.featured-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.featured-project .project-links,
+.featured-project .project-tags {
+  grid-area: auto;
+  min-width: 0;
+  align-self: start;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.featured-project .project-links {
+  justify-content: flex-start;
+  justify-self: start;
+}
+
+.featured-project .project-tags {
+  justify-content: flex-start;
+  justify-self: start;
+  margin-left: 0;
+}
+
+.featured-copy {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.featured-subtitle,
+.featured-description {
+  width: 100%;
+  margin: 0;
+}
+
+.featured-subtitle {
+  font-size: clamp(0.82rem, 1vw, 0.9rem);
+  text-transform: uppercase;
+}
+
+.featured-project h3 {
+  margin: 0;
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  font-weight: 500;
+}
+
+.featured-description {
+  opacity: 0.75;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
 .projects {
   border-top: 1px solid var(--border-soft);
   overflow: visible;
@@ -269,6 +382,11 @@ h1 {
      Right — project links (top) and project tags (bottom), both right-aligned
    ─────────────────────────────────────────────────────────────────────── */
 @media (max-width: 880px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
   .project {
     grid-template-columns: 124px 1fr auto;
     grid-template-rows: auto auto;
@@ -380,6 +498,47 @@ h1 {
 
   .projects {
     border-top: 1px solid var(--border-medium);
+  }
+
+  .featured {
+    margin-top: 0;
+  }
+
+  .archive {
+    margin-top: 2.75rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .featured-project {
+    gap: 0.875rem;
+    padding: 1.1rem 0 1.5rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .featured-project .project-tags {
+    justify-content: flex-start;
+    justify-self: start;
+    margin-left: 0;
+  }
+
+  .featured-description {
+    max-width: none;
+    font-size: 0.9rem;
   }
 
   .project {
