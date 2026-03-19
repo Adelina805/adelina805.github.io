@@ -162,6 +162,7 @@ h1 {
 
 .featured {
   margin-top: 0;
+  margin-bottom: 5rem;
 }
 
 .archive {
@@ -174,6 +175,15 @@ h1 {
   gap: 1rem;
   align-items: baseline;
   margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  order: 1;
+}
+
+.section-header .section-label {
+  order: 2;
+  margin-left: auto;
 }
 
 .section-label {
@@ -250,21 +260,16 @@ h1 {
   gap: 0.45rem;
 }
 
-.featured-subtitle,
 .featured-description {
   width: 100%;
   margin: 0;
-}
-
-.featured-subtitle {
-  font-size: clamp(0.82rem, 1vw, 0.9rem);
-  text-transform: uppercase;
 }
 
 .featured-project h3 {
   margin: 0;
   font-size: clamp(1rem, 1.4vw, 1.1rem);
   font-weight: 500;
+  margin-bottom: 0.2rem;
 }
 
 .featured-description {
@@ -313,7 +318,7 @@ h1 {
   font-size: clamp(0.95rem, 1.2vw, 1rem);
 }
 
-.project-main p {
+.subtitle {
   margin: 0;
   text-transform: uppercase;
   font-size: clamp(0.85rem, 1vw, 0.938rem);
@@ -502,6 +507,7 @@ h1 {
 
   .featured {
     margin-top: 0;
+    margin-bottom: 3.5rem;
   }
 
   .archive {
@@ -509,10 +515,16 @@ h1 {
   }
 
   .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.3rem;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .section-label,
+  .section-header h2 {
+    min-width: 0;
   }
 
   .featured-project {
