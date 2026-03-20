@@ -144,6 +144,12 @@ footer {
   text-decoration: underline;
 }
 
+.socials a[aria-current="page"] {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 .theme-toggle,
 .menu-toggle {
   appearance: none;
