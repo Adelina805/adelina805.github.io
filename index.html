@@ -17,11 +17,9 @@
             <div class="header-top">
                 <p class="note">A portfolio and archive of my work.</p>
                 <nav class="socials">
-                    <a href="mailto:adelina.martinez805@gmail.com">Email</a>
-                    <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
-                    <a href="https://www.linkedin.com/in/adelina-martinez/" target="_blank"
-                        rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://github.com/adelina805" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#archive">Archive</a>
                     <!-- Desktop utility toggle: appears as the last item in the nav row. -->
                     <button class="theme-toggle desktop-theme-toggle" type="button" aria-label="Switch to dark mode"
                         title="Toggle theme">
@@ -91,15 +89,13 @@
 
             <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation">
                 <span class="mobile-menu-note">A portfolio and archive of my work.</span>
-                <a href="mailto:adelina.martinez805@gmail.com">Email</a>
-                <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
-                <a href="https://www.linkedin.com/in/adelina-martinez/" target="_blank"
-                    rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://github.com/adelina805" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#archive">Archive</a>
             </nav>
 
-            <h1>Adelina Martinez</h1>
-            <p class="intro">
+            <h1 id="home">Adelina Martinez</h1>
+            <p id="about" class="intro">
                 designer who develops and
                 developer who designs.</p>
         </header>
@@ -265,7 +261,7 @@
             </div>
         </section>
 
-        <section class="archive" aria-labelledby="archive-heading">
+        <section id="archive" class="archive" aria-labelledby="archive-heading">
             <div class="section-header">
                 <p class="section-label">Full Index</p>
                 <h2 id="archive-heading">Archive</h2>
@@ -720,8 +716,24 @@
         </section>
 
         <footer>
-            <p class="note">made with ♥ by <a href="https://github.com/Adelina805/adelina805.github.io" target="_blank"
-                    rel="noopener noreferrer">Adelina</a></p>
+            <div class="footer-row">
+                <nav class="socials" aria-label="Social links">
+                    <a href="mailto:adelina.martinez805@gmail.com">Email</a>
+                    <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+                    <a href="https://www.linkedin.com/in/adelina-martinez/" target="_blank"
+                        rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://github.com/adelina805" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </nav>
+
+                <p class="note footer-note">made with ♥ by <a href="https://github.com/Adelina805/adelina805.github.io"
+                        target="_blank" rel="noopener noreferrer">Adelina</a></p>
+
+                <nav class="socials footer-pages" aria-label="Page links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#archive">Archive</a>
+                </nav>
+            </div>
         </footer>
     </main>
 </body>
