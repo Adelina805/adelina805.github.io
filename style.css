@@ -26,19 +26,13 @@ body.dark {
   --border-strong: color-mix(in srgb, var(--main-color) 58%, transparent);
   --border-medium: color-mix(in srgb, var(--main-color) 48%, transparent);
   --border-soft: color-mix(in srgb, var(--main-color) 38%, transparent);
+  background: linear-gradient(to bottom, #2f7ab6 0%, #0a0a0a 100%) fixed;
 }
 
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background-color: #eef3fb;
-  background-image:
-    linear-gradient(var(--overlay-color), var(--overlay-color)),
-    url("images/background.webp");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(to bottom, #85b7e0 0%, #fafafa 100%) fixed;
   color: var(--main-color);
 }
 
