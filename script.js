@@ -80,6 +80,83 @@ function attachIcons() {
   }
 }
 
+function setupRevealOnScroll() {
+  const revealEls = document.querySelectorAll(".reveal-on-scroll");
+  if (!revealEls.length) {
+    return;
+  }
+
+  const elements = Array.from(revealEls);
+  const canUseInert = "inert" in elements[0];
+
+  // Start hidden; CSS handles the animation until `.is-visible` is added.
+  for (const el of elements) {
+    el.classList.remove("is-visible");
+    el.setAttribute("aria-hidden", "true");
+    if (canUseInert) {
+      el.inert = true;
+    }
+  }
+
+  const show = (el) => {
+    el.classList.add("is-visible");
+    el.setAttribute("aria-hidden", "false");
+    if (canUseInert) {
+      el.inert = false;
+    }
+  };
+
+  // If the user hasn't scrolled yet, don't reveal even if layout shifts.
+  let hasUserScrolled = window.scrollY > 0;
+  const revealOnceScroll = window.scrollY > 0;
+
+  if (!revealOnceScroll) {
+    window.addEventListener(
+      "scroll",
+      () => {
+        hasUserScrolled = true;
+      },
+      { once: true },
+    );
+  } else {
+    hasUserScrolled = true;
+  }
+
+  // No IntersectionObserver: fall back to showing once we know user scrolled.
+  if (!("IntersectionObserver" in window)) {
+    if (hasUserScrolled) {
+      for (const el of elements) show(el);
+    }
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) {
+          continue;
+        }
+
+        // Reveal only after the user has started scrolling (or via anchor navigation).
+        if (!hasUserScrolled) {
+          if (window.scrollY <= 0) {
+            continue;
+          }
+          hasUserScrolled = true;
+        }
+
+        show(entry.target);
+        obs.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+  );
+
+  for (const el of elements) {
+    observer.observe(el);
+  }
+}
+
 // Handles body class, icon swap, and persistent label updates for both theme toggle buttons.
 function setupThemeToggle() {
   const toggles = document.querySelectorAll(".theme-toggle");
@@ -156,4 +233,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setupThemeToggle();
   setupMobileMenu();
   attachIcons();
+  setupRevealOnScroll();
 });
