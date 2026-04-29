@@ -106,14 +106,15 @@ footer {
 }
 
 .footer-row {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
 }
 
 .footer-note {
-  justify-self: center;
+  margin-left: auto;
+  text-align: right;
 }
 
 .footer-pages {
@@ -237,7 +238,8 @@ h1 {
   max-width: 64ch;
 }
 
-.about-content h1 {
+.about-content h1,
+.about-content h2 {
   margin: 0 0 1rem;
   text-align: left;
   font-family: Georgia, serif;
@@ -255,6 +257,168 @@ h1 {
 .about-content p {
   margin: 0 0 1rem;
   line-height: 1.7;
+}
+
+/* Anchor navigation: keep section headings comfortably visible. */
+#about,
+#featured,
+#archive,
+#experience {
+  scroll-margin-top: 6rem;
+}
+
+/* ─── Experience / Contact ───────────────────────────────────── */
+.experience {
+  margin-top: 4rem;
+}
+
+.experience-items {
+  border-top: 1px solid var(--border-soft);
+}
+
+.experience-role {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.experience-role-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.experience-role-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
+  flex: 0 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.experience-role-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.experience-role-media {
+  flex: 0 0 170px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
+  display: flex;
+}
+
+.experience-role-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.experience-role-media--169 {
+  aspect-ratio: 16 / 9;
+}
+
+.experience-role-media--43 {
+  /* Force consistent sizing across all experience GIFs. */
+  aspect-ratio: 16 / 9;
+}
+
+.experience-role-head {
+  display: flex;
+  /* Keep the role header content (title/org/dates) stacked vertically */
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.25rem 0;
+  align-items: flex-start;
+}
+
+.experience-title {
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  font-weight: 600;
+}
+
+.experience-org {
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.experience-dates {
+  opacity: 0.65;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.experience-bullets {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  line-height: 1.7;
+}
+
+.experience-bullets li {
+  margin: 0.35rem 0;
+}
+
+.experience-tags {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.experience-tags span {
+  border: 1px solid var(--border-soft);
+  padding: 0.35rem 0.6rem;
+  opacity: 0.8;
+  font-size: clamp(0.813rem, 1.2vw, 0.875rem);
+}
+
+.contact {
+  margin-top: 4rem;
+  padding-top: 0.75rem;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-lead {
+  width: min(640px, 100%);
+  margin: 0 0 1.25rem;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.contact-cta {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--border-medium);
+  border-radius: 999px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+
+.contact-cta:hover {
+  background-color: var(--surface-hover);
+  transform: scale(1.01);
 }
 
 .section-header {
@@ -523,6 +687,23 @@ h1 {
     padding: 0 0 5rem;
   }
 
+  .experience-role {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .experience-role-logo {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .experience-role-media {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
   .header-top {
     margin-bottom: 1rem;
   }
@@ -698,12 +879,31 @@ h1 {
   }
 
   .footer-row {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    flex-direction: column;
+    align-items: center;
     gap: 0.75rem;
   }
 
-  .footer-pages {
-    justify-self: center;
+  .footer-note {
+    text-align: center;
+    margin-left: 0;
   }
+}
+
+:root {
+  --main-color: #111111;
+  --overlay-color: #9fc5ff4d;
+
+  --border-strong: color-mix(in srgb, var(--main-color) 50%, transparent);
+  --border-medium: color-mix(in srgb, var(--main-color) 40%, transparent);
+  --border-soft: color-mix(in srgb, var(--main-color) 30%, transparent);
+  --surface-hover: color-mix(in srgb, #f5f5f5 10%, transparent);
+  --surface-hover-soft: color-mix(in srgb, #f5f5f5 7%, transparent);
+  --interactive-duration: 0.18s;
+  --interactive-ease: ease;
+  --focus-ring: color-mix(in srgb, var(--main-color) 45%, transparent);
+
+  --project-main-col: 280px;
+  --project-links-col: 240px;
+  --project-tags-col: 300px;
 }

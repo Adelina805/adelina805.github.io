@@ -153,7 +153,7 @@ function setupMobileMenu() {
 
 document.addEventListener("DOMContentLoaded", () => {
   ensureIconSprite();
-  attachIcons();
   setupThemeToggle();
   setupMobileMenu();
+  attachIcons();
 });
