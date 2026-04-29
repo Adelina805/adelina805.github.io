@@ -106,27 +106,9 @@ function setupRevealOnScroll() {
     }
   };
 
-  // If the user hasn't scrolled yet, don't reveal even if layout shifts.
-  let hasUserScrolled = window.scrollY > 0;
-  const revealOnceScroll = window.scrollY > 0;
-
-  if (!revealOnceScroll) {
-    window.addEventListener(
-      "scroll",
-      () => {
-        hasUserScrolled = true;
-      },
-      { once: true },
-    );
-  } else {
-    hasUserScrolled = true;
-  }
-
-  // No IntersectionObserver: fall back to showing once we know user scrolled.
+  // No IntersectionObserver: show all immediately (older browsers).
   if (!("IntersectionObserver" in window)) {
-    if (hasUserScrolled) {
-      for (const el of elements) show(el);
-    }
+    for (const el of elements) show(el);
     return;
   }
 
@@ -137,19 +119,12 @@ function setupRevealOnScroll() {
           continue;
         }
 
-        // Reveal only after the user has started scrolling (or via anchor navigation).
-        if (!hasUserScrolled) {
-          if (window.scrollY <= 0) {
-            continue;
-          }
-          hasUserScrolled = true;
-        }
-
         show(entry.target);
         obs.unobserve(entry.target);
       }
     },
-    { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+    // Reveal as soon as a small part of the section is in view.
+    { threshold: 0.01, rootMargin: "0px 0px -5% 0px" },
   );
 
   for (const el of elements) {
@@ -165,6 +140,11 @@ function setupThemeToggle() {
   }
 
   const storageKey = "portfolio-theme";
+  const shouldBlurOnTap =
+    (typeof window.matchMedia === "function" &&
+      (window.matchMedia("(pointer: coarse)").matches ||
+        window.matchMedia("(hover: none)").matches)) ||
+    "ontouchstart" in window;
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const savedTheme = localStorage.getItem(storageKey);
   const initialDark = savedTheme ? savedTheme === "dark" : prefersDark;
@@ -178,6 +158,8 @@ function setupThemeToggle() {
       document.body.classList.toggle("dark", nowDark);
       localStorage.setItem(storageKey, nowDark ? "dark" : "light");
       updateThemeToggleLabels(nowDark, toggles);
+      // Prevent touch browsers from keeping a "hover" styling state.
+      if (shouldBlurOnTap) toggle.blur();
     });
   }
 }
@@ -199,6 +181,12 @@ function setupMobileMenu() {
     return;
   }
 
+  const shouldBlurOnTap =
+    (typeof window.matchMedia === "function" &&
+      (window.matchMedia("(pointer: coarse)").matches ||
+        window.matchMedia("(hover: none)").matches)) ||
+    "ontouchstart" in window;
+
   menuToggle.addEventListener("click", () => {
     const isOpen = mobileMenu.classList.toggle("is-open");
     menuToggle.setAttribute("aria-expanded", String(isOpen));
@@ -207,6 +195,8 @@ function setupMobileMenu() {
       isOpen ? "Close mobile menu" : "Open mobile menu",
     );
     menuToggle.setAttribute("title", isOpen ? "Close menu" : "Open menu");
+    // Prevent touch browsers from keeping a "hover" styling state.
+    if (shouldBlurOnTap) menuToggle.blur();
   });
 
   for (const link of mobileMenu.querySelectorAll("a")) {
@@ -215,6 +205,7 @@ function setupMobileMenu() {
       menuToggle.setAttribute("aria-expanded", "false");
       menuToggle.setAttribute("aria-label", "Open mobile menu");
       menuToggle.setAttribute("title", "Open menu");
+      if (shouldBlurOnTap) menuToggle.blur();
     });
   }
 
