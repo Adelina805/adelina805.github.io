@@ -339,7 +339,7 @@ h1 {
   /* Keep the role header content (title/org/dates) stacked vertically */
   flex-direction: column;
   flex-wrap: nowrap;
-  gap: 0.25rem 0;
+  gap: 0.45rem 0;
   align-items: flex-start;
 }
 
