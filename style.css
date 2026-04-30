@@ -117,6 +117,49 @@ footer {
   text-align: right;
 }
 
+.footer-heart {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  padding: 0 0.12rem;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transform-origin: center;
+}
+
+.footer-heart.is-bouncing {
+  animation: footer-heart-bounce 0.42s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+@keyframes footer-heart-bounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  35% {
+    transform: translateY(-1.5px) scale(1.08);
+  }
+
+  60% {
+    transform: translateY(0) scale(0.96);
+  }
+
+  80% {
+    transform: translateY(-0.5px) scale(1.02);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
 .footer-pages {
   justify-self: end;
 }

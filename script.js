@@ -219,10 +219,30 @@ function setupMobileMenu() {
   });
 }
 
+function setupFooterHearts() {
+  const hearts = document.querySelectorAll(".footer-heart");
+  if (!hearts.length) {
+    return;
+  }
+
+  for (const heart of hearts) {
+    heart.addEventListener("click", () => {
+      heart.classList.remove("is-bouncing");
+      void heart.offsetWidth;
+      heart.classList.add("is-bouncing");
+    });
+
+    heart.addEventListener("animationend", () => {
+      heart.classList.remove("is-bouncing");
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   ensureIconSprite();
   setupThemeToggle();
   setupMobileMenu();
+  setupFooterHearts();
   attachIcons();
   setupRevealOnScroll();
 });
