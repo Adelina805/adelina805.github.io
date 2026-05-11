@@ -26,7 +26,8 @@ html {
   --focus-ring: color-mix(in srgb, var(--main-color) 45%, transparent);
 
   --project-main-col: 280px;
-  --project-links-col: 240px;
+  /* Two pill links + gap; 240px was too tight for longer labels (e.g. repository + read post) */
+  --project-links-col: 340px;
   --project-tags-col: 300px;
 }
 
@@ -1097,6 +1098,7 @@ h1 {
   --focus-ring: color-mix(in srgb, var(--main-color) 45%, transparent);
 
   --project-main-col: 280px;
-  --project-links-col: 240px;
+  /* Two pill links + gap; 240px was too tight for longer labels (e.g. repository + read post) */
+  --project-links-col: 340px;
   --project-tags-col: 300px;
 }
