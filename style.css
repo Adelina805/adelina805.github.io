@@ -305,12 +305,35 @@ h1 {
   align-items: start;
 }
 
-.about-image {
+.about-image-wrap {
   width: 100%;
   max-width: 360px;
+  line-height: 0;
+}
+
+.about-image {
+  width: 100%;
   height: auto;
   display: block;
-  border: 1px solid var(--border-strong);
+  /* Fade the photo into the page background (body gradient shows through). */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 calc(100% - 9rem),
+    rgba(0, 0, 0, 0.45) calc(100% - 3.5rem),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 calc(100% - 9rem),
+    rgba(0, 0, 0, 0.45) calc(100% - 3.5rem),
+    transparent 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .about-content {
@@ -756,7 +779,7 @@ h1 {
     gap: 1.25rem;
   }
 
-  .about-image {
+  .about-image-wrap {
     max-width: 280px;
     /* When stacked to a single column, center the portrait. */
     justify-self: center;
