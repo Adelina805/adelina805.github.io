@@ -400,7 +400,6 @@ h1 {
   height: 48px;
   border-radius: 999px;
   overflow: hidden;
-  border: 1px solid var(--border-soft);
   background: var(--surface);
   flex: 0 0 48px;
   display: flex;
@@ -421,7 +420,6 @@ h1 {
   aspect-ratio: 3 / 2;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--border-soft);
   background: var(--surface);
   display: flex;
 }
@@ -576,7 +574,6 @@ h1 {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
-  border: 1px solid var(--border-strong);
   background: #ddd;
   object-fit: cover;
   display: block;
@@ -659,7 +656,6 @@ h1 {
   grid-area: thumb;
   width: 124px;
   height: 70px;
-  border: 1px solid var(--border-strong);
   background: #ddd;
   object-fit: cover;
   display: block;
