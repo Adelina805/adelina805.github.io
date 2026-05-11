@@ -219,6 +219,45 @@ function setupMobileMenu() {
   });
 }
 
+function setupArchiveFilters() {
+  const projectsRoot = document.getElementById("archive-projects");
+  const filterRoot = document.querySelector(".archive-filters");
+  if (!projectsRoot || !filterRoot) {
+    return;
+  }
+
+  const projects = projectsRoot.querySelectorAll(
+    "article.project[data-archive-category]",
+  );
+  const buttons = filterRoot.querySelectorAll("button[data-archive-filter]");
+  if (!projects.length || !buttons.length) {
+    return;
+  }
+
+  const applyFilter = (value) => {
+    for (const article of projects) {
+      const cat = article.getAttribute("data-archive-category");
+      const show = value === "all" || cat === value;
+      article.hidden = !show;
+      article.classList.toggle("is-archive-hidden", !show);
+    }
+
+    for (const btn of buttons) {
+      const active = btn.dataset.archiveFilter === value;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", String(active));
+    }
+  };
+
+  for (const btn of buttons) {
+    btn.addEventListener("click", () => {
+      applyFilter(btn.dataset.archiveFilter);
+    });
+  }
+
+  applyFilter("all");
+}
+
 function setupFooterHearts() {
   const hearts = document.querySelectorAll(".footer-heart");
   if (!hearts.length) {
@@ -244,5 +283,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupMobileMenu();
   setupFooterHearts();
   attachIcons();
+  setupArchiveFilters();
   setupRevealOnScroll();
 });

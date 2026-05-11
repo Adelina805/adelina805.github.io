@@ -431,15 +431,35 @@
             </div>
         </section>
 
-        <section id="archive" class="archive reveal-on-scroll" aria-labelledby="archive-heading">
+        <section id="archive" class="archive" aria-labelledby="archive-heading">
             <div class="section-header">
                 <p class="section-label">Full Index</p>
                 <h2 id="archive-heading">Archive</h2>
             </div>
 
-            <div id="archive-projects" class="projects" aria-label="Project archive">
+            <div class="archive-filters" role="group" aria-labelledby="archive-filters-label">
+                <p id="archive-filters-label" class="archive-filters-label">Filter by category</p>
+                <div class="archive-filters-buttons">
+                    <button type="button" class="archive-filter-btn is-active" data-archive-filter="all"
+                        aria-pressed="true">All</button>
+                    <button type="button" class="archive-filter-btn" data-archive-filter="client-work"
+                        aria-pressed="false">Client Work / Shipped</button>
+                    <button type="button" class="archive-filter-btn" data-archive-filter="just-for-fun"
+                        aria-pressed="false">Just for Fun</button>
+                    <button type="button" class="archive-filter-btn" data-archive-filter="hackathon"
+                        aria-pressed="false">Hackathon</button>
+                    <button type="button" class="archive-filter-btn" data-archive-filter="portfolio-exploration"
+                        aria-pressed="false">Portfolio Exploration</button>
+                    <button type="button" class="archive-filter-btn" data-archive-filter="design-branding"
+                        aria-pressed="false">Design and Branding</button>
+                    <button type="button" class="archive-filter-btn" data-archive-filter="research"
+                        aria-pressed="false">Research</button>
+                </div>
+            </div>
+
+            <div id="archive-projects" class="projects reveal-on-scroll" aria-label="Project archive">
                 <!-- // VYNL | music → visual art -->
-                <article class="project">
+                <article class="project" data-archive-category="just-for-fun">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/vynl.webp"
                         alt="Screenshot of VYNL project">
                     <div class="project-main">
@@ -459,7 +479,7 @@
                 </article>
 
                 <!-- // Aquacalma  -->
-                <article class="project">
+                <article class="project" data-archive-category="just-for-fun">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/aquacalma.webp"
                         alt="Screenshot of Aquacalma project">
                     <div class="project-main">
@@ -479,7 +499,7 @@
                 </article>
 
                 <!-- // Adelina's Timeline at SDSU -->
-                <article class="project">
+                <article class="project" data-archive-category="just-for-fun">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/timeline.webp"
                         alt="Screenshot of Adelina's Timeline at SDSU project">
                     <div class="project-main">
@@ -500,7 +520,7 @@
                 </article>
 
                 <!-- // Dave Castro Photography -->
-                <article class="project">
+                <article class="project" data-archive-category="client-work">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/dcphoto.webp"
                         alt="Screenshot of Dave Castro Photography project">
                     <div class="project-main">
@@ -519,7 +539,7 @@
                 </article>
 
                 <!-- // Pallan Cooling and Heating -->
-                <article class="project">
+                <article class="project" data-archive-category="client-work">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/pallan.webp"
                         alt="Screenshot of Pallan Cooling and Heating project">
                     <div class="project-main">
@@ -538,7 +558,7 @@
                 </article>
 
                 <!-- // Groundwork Books Collective -->
-                <article class="project">
+                <article class="project" data-archive-category="client-work">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/groundworks.webp"
                         alt="Screenshot of Groundwork Books Collective project">
                     <div class="project-main">
@@ -559,7 +579,7 @@
                 </article>
 
                 <!-- // Menteligent for DILab SDSU -->
-                <article class="project">
+                <article class="project" data-archive-category="client-work">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/dilab.png"
                         alt="Screenshot of Menteligent for DILab project">
                     <div class="project-main">
@@ -577,7 +597,7 @@
                 </article>
 
                 <!-- // Copilot Career -->
-                <article class="project">
+                <article class="project" data-archive-category="client-work">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/ccareer.webp"
                         alt="Screenshot of Copilot Career project">
                     <div class="project-main">
@@ -595,7 +615,7 @@
                 </article>
 
                 <!-- // Menteligent -->
-                <article class="project">
+                <article class="project" data-archive-category="client-work">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/menteligent.png"
                         alt="Screenshot of Menteligent project">
                     <div class="project-main">
@@ -615,7 +635,7 @@
                 </article>
 
                 <!-- // Bookfein Webflow CMS Website -->
-                <article class="project">
+                <article class="project" data-archive-category="just-for-fun">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/bookfein.webp"
                         alt="Screenshot of Bookfein project">
                     <div class="project-main">
@@ -636,7 +656,7 @@
                 </article>
 
                 <!-- // Three.js Website -->
-                <article class="project">
+                <article class="project" data-archive-category="just-for-fun">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/threejs.webp"
                         alt="Screenshot of Three.js Website project">
                     <div class="project-main">
@@ -657,7 +677,7 @@
                 </article>
 
                 <!-- // Instructional Design Research -->
-                <article class="project">
+                <article class="project" data-archive-category="research">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/idresearch.webp"
                         alt="Screenshot of Instructional Design Research project">
                     <div class="project-main">
@@ -677,7 +697,7 @@
                 </article>
 
                 <!-- // AztecPlanner Hackathon -->
-                <article class="project">
+                <article class="project" data-archive-category="hackathon">
                     <img class="thumbnail" loading="lazy" width="124" height="70"
                         src="images/projects/aztecplanner.webp" alt="Screenshot of AztecPlanner project">
                     <div class="project-main">
@@ -698,7 +718,7 @@
                 </article>
 
                 <!-- // LUMI -->
-                <article class="project">
+                <article class="project" data-archive-category="design-branding">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/lumi.webp"
                         alt="Screenshot of LUMI project">
                     <div class="project-main">
@@ -719,7 +739,7 @@
                 </article>
 
                 <!-- // Game Dev Portfolio -->
-                <article class="project">
+                <article class="project" data-archive-category="just-for-fun">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/gamedev.webp"
                         alt="Screenshot of Game Dev Portfolio project">
                     <div class="project-main">
@@ -739,7 +759,7 @@
                 </article>
 
                 <!-- // EcoHood Hackathon -->
-                <article class="project">
+                <article class="project" data-archive-category="hackathon">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/ecohood.webp"
                         alt="Screenshot of EcoHood project">
                     <div class="project-main">
@@ -760,7 +780,7 @@
                 </article>
 
                 <!-- // UnHelpful AI Lab -->
-                <article class="project">
+                <article class="project" data-archive-category="hackathon">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/unhelpfulai.webp"
                         alt="Screenshot of UnHelpful AI Lab project">
                     <div class="project-main">
@@ -781,7 +801,7 @@
                 </article>
 
                 <!-- // UI of the Week Challenge -->
-                <article class="project">
+                <article class="project" data-archive-category="design-branding">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/uioftheweek.webp"
                         alt="Screenshot of UI of the Week Challenge designs">
                     <div class="project-main">
@@ -801,7 +821,7 @@
                 </article>
 
                 <!-- // Portfolio Archive System (this site) -->
-                <article class="project">
+                <article class="project" data-archive-category="portfolio-exploration">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/thissite.webp"
                         alt="Screenshot of Portfolio Archive System project">
                     <div class="project-main">
@@ -822,7 +842,7 @@
                 </article>
 
                 <!-- // Archived Portfolio Iteration -->
-                <article class="project">
+                <article class="project" data-archive-category="portfolio-exploration">
                     <img class="thumbnail" loading="lazy" width="124" height="70"
                         src="images/projects/newportfolio.webp" alt="Screenshot of New Portfolio project">
                     <div class="project-main">
@@ -843,7 +863,7 @@
                 </article>
 
                 <!-- // Scrapped Portfolio Concept -->
-                <article class="project">
+                <article class="project" data-archive-category="portfolio-exploration">
                     <img class="thumbnail" loading="lazy" width="124" height="70"
                         src="images/projects/scrappedport.webp" alt="Screenshot of Scrapped Portfolio project">
                     <div class="project-main">
@@ -864,7 +884,7 @@
                 </article>
 
                 <!-- // Old Adobe Portfolio -->
-                <article class="project">
+                <article class="project" data-archive-category="portfolio-exploration">
                     <img class="thumbnail" loading="lazy" width="124" height="70"
                         src="images/projects/oldportfolio.webp" alt="Screenshot of Current and Old Portfolio project">
                     <div class="project-main">
@@ -883,7 +903,7 @@
                 </article>
 
                 <!-- // OHS Beach Tribe Branding -->
-                <article class="project">
+                <article class="project" data-archive-category="design-branding">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/ohsbeach.webp"
                         alt="Screenshot of OHS Beach Tribe Branding project">
                     <div class="project-main">
@@ -901,7 +921,7 @@
                 </article>
 
                 <!-- // BobaCat Branding -->
-                <article class="project">
+                <article class="project" data-archive-category="design-branding">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/bobacat.webp"
                         alt="Screenshot of BobaCat Branding project">
                     <div class="project-main">
@@ -919,7 +939,7 @@
                 </article>
 
                 <!-- // Sunset Sweets -->
-                <article class="project">
+                <article class="project" data-archive-category="design-branding">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/ssweets.webp"
                         alt="Screenshot of Sunset Sweets Branding project">
                     <div class="project-main">
@@ -937,7 +957,7 @@
                 </article>
 
                 <!-- // Ceramic Work Collection -->
-                <article class="project">
+                <article class="project" data-archive-category="design-branding">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/ceramics.webp"
                         alt="Screenshot of Ceramic Work collection">
                     <div class="project-main">
