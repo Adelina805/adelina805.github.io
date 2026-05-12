@@ -80,7 +80,16 @@ h1 {
 .page {
   width: min(1100px, 92%);
   margin: 0 auto;
-  padding: 2rem 0 5rem;
+  --page-padding-block-start: 2rem;
+  padding: var(--page-padding-block-start) 0 5rem;
+}
+
+/* First screen: header + about fill the viewport so #featured starts below the fold (no guessed header height). */
+.fold-hero {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--page-padding-block-start));
+  min-height: calc(100svh - var(--page-padding-block-start));
 }
 
 .site-header {
@@ -350,9 +359,9 @@ h1 {
 .about-section {
   margin-top: 0;
   padding-top: 0;
-  /* Make the About section feel like the landing view. */
-  min-height: calc(100vh - 12.7rem);
-  margin-bottom: 2rem;
+  /* Grow with .fold-hero so short copy still pushes #featured below the first screen. */
+  flex: 1 1 auto;
+  margin-bottom: 6rem;
   display: flex;
   align-items: center;
 }
@@ -363,6 +372,12 @@ h1 {
   gap: clamp(1.5rem, 3vw, 3rem);
   /* Keep the portrait aligned to the top of the about block. */
   align-items: start;
+}
+
+@media (min-width: 881px) {
+  .about-layout {
+    margin-top: -3rem;
+  }
 }
 
 .about-image-wrap {
@@ -832,13 +847,22 @@ h1 {
 
   .about-layout {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    /* More air between portrait and copy when the grid stacks (≤880px). */
+    gap: clamp(2rem, 5vw, 3rem);
   }
 
   .about-image-wrap {
     max-width: 280px;
     /* When stacked to a single column, center the portrait. */
     justify-self: center;
+  }
+}
+
+/* Tablet portrait / narrow: extra rhythm between About and Featured (mobile sets its own about margins). */
+@media (max-width: 880px) and (min-width: 601px) {
+  /* Single margin avoids collapse with .featured; stronger rhythm than desktop 2rem. */
+  .about-section {
+    margin-bottom: 6.5rem;
   }
 }
 
@@ -849,12 +873,11 @@ h1 {
    ─────────────────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
   .page {
+    --page-padding-block-start: 0px;
     padding: 0 0 5rem;
   }
 
   .about-section {
-    /* Allow content to breathe without pushing everything too far down. */
-    min-height: calc(90vh - 12.7rem);
     margin-bottom: 4rem;
   }
 

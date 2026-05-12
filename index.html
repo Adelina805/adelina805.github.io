@@ -27,7 +27,8 @@
 
 <body>
     <main class="page" id="top">
-        <header class="site-header">
+        <div class="fold-hero">
+            <header class="site-header">
             <div class="header-top">
                 <p class="note">A portfolio and archive of my work.</p>
                 <nav class="socials" aria-label="Primary navigation">
@@ -110,9 +111,9 @@
                 <a href="#archive">Archive</a>
             </nav>
 
-        </header>
+            </header>
 
-        <section id="about" class="about-section" aria-labelledby="about-heading">
+            <section id="about" class="about-section" aria-labelledby="about-heading">
             <div class="about-layout">
                 <div class="about-image-wrap">
                     <img class="about-image" src="images/adelina.png" alt="Portrait of Adelina Martinez">
@@ -135,7 +136,8 @@
                         Welcome to my corner of the internet, I made it myself :)</p>
                 </div>
             </div>
-        </section>
+            </section>
+        </div>
 
         <section id="featured" class="featured reveal-on-scroll" aria-labelledby="featured-heading">
             <div class="section-header">
@@ -431,7 +433,7 @@
             </div>
         </section>
 
-        <section id="archive" class="archive" aria-labelledby="archive-heading">
+        <section id="archive" class="archive reveal-on-scroll" aria-labelledby="archive-heading">
             <div class="section-header">
                 <p class="section-label">Filter by category</p>
                 <h2 id="archive-heading">Archive</h2>
@@ -456,7 +458,7 @@
                 </div>
             </div>
 
-            <div id="archive-projects" class="projects reveal-on-scroll" aria-label="Project archive">
+            <div id="archive-projects" class="projects" aria-label="Project archive">
                 <!-- // VYNL | music → visual art -->
                 <article class="project" data-archive-category="just-for-fun">
                     <img class="thumbnail" loading="lazy" width="124" height="70" src="images/projects/vynl.webp"
