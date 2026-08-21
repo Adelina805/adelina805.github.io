@@ -87,23 +87,27 @@ function setupRevealOnScroll() {
   }
 
   const elements = Array.from(revealEls);
-  const canUseInert = "inert" in elements[0];
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
-  // Start hidden; CSS handles the animation until `.is-visible` is added.
-  for (const el of elements) {
-    el.classList.remove("is-visible");
-    el.setAttribute("aria-hidden", "true");
-    if (canUseInert) {
-      el.inert = true;
+  // Keep content visible for crawlers and assistive tech. Only animate when
+  // JS is running and the user has not requested reduced motion.
+  if (prefersReducedMotion) {
+    for (const el of elements) {
+      el.classList.add("is-visible");
     }
+    return;
+  }
+
+  for (const el of elements) {
+    el.classList.add("reveal-pending");
+    el.classList.remove("is-visible");
   }
 
   const show = (el) => {
     el.classList.add("is-visible");
-    el.setAttribute("aria-hidden", "false");
-    if (canUseInert) {
-      el.inert = false;
-    }
+    el.classList.remove("reveal-pending");
   };
 
   // No IntersectionObserver: show all immediately (older browsers).
