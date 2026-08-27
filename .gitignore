@@ -1,0 +1,5 @@
+# Local browser-verification artifacts (Chrome profiles, screenshots)
+.tmp-verify/
+
+# macOS
+.DS_Store
