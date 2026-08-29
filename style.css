@@ -135,6 +135,12 @@ h1 {
   z-index: 100;
 }
 
+.sidebar > .theme-toggle {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
 .sidebar-brand {
   margin-bottom: 40px;
 }
@@ -289,15 +295,15 @@ h1 {
   vertical-align: middle;
 }
 
-.icon-sun {
-  display: none;
-}
-
-body.dark .icon-moon {
+.icon-moon {
   display: none;
 }
 
 body.dark .icon-sun {
+  display: none;
+}
+
+body.dark .icon-moon {
   display: inline;
 }
 
