@@ -162,6 +162,25 @@ h1 {
   object-fit: cover;
   object-position: center top;
   display: block;
+  /* Fade the photo into the page background (body gradient shows through). */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 calc(100% - 6.5rem),
+    rgba(0, 0, 0, 0.7) calc(100% - 2.5rem),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 calc(100% - 6.5rem),
+    rgba(0, 0, 0, 0.7) calc(100% - 2.5rem),
+    transparent 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .home-hero-copy {
