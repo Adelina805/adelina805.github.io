@@ -36,6 +36,7 @@ html {
   --focus-ring: color-mix(in srgb, var(--main-color) 45%, transparent);
 
   --sidebar-bg: color-mix(in srgb, #EFEFEF 20%, transparent);
+  --page-bg: linear-gradient(to bottom, #6898de 0%, #fafafa 100%);
 
   --project-main-col: 280px;
   /* Two pill links + gap; 240px was too tight for longer labels (e.g. repository + read post) */
@@ -53,13 +54,13 @@ body.dark {
   --surface-hover: color-mix(in srgb, var(--main-color) 10%, transparent);
   --surface-hover-soft: color-mix(in srgb, var(--main-color) 7%, transparent);
   --sidebar-bg: color-mix(in srgb, #02114C 20%, transparent);
-  background: linear-gradient(to bottom, #285596 0%, #000103 100%) fixed;
+  --page-bg: linear-gradient(to bottom, #285596 0%, #000103 100%);
 }
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #6898de 0%, #fafafa 100%) fixed;
+  background: var(--page-bg) fixed;
   color: var(--main-color);
   display: flex;
   min-height: 100vh;
@@ -932,6 +933,8 @@ h1 {
     transform: translateX(-100%);
     transition: transform 0.28s var(--interactive-ease);
     box-shadow: none;
+    /* Match the page gradient (fixed) so the overlay is opaque, not the 20% wash. */
+    background: var(--page-bg) fixed;
   }
 
   .sidebar.is-open {
