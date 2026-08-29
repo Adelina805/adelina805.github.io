@@ -115,7 +115,7 @@ h1 {
   padding: var(--page-padding-block-start) 0 var(--section-gap);
 }
 
-/* Shared width: sizes to the hero layout; bio matches the same column. */
+/* Shared width: sizes to the hero layout. */
 .home-column {
   width: fit-content;
   max-width: 100%;
@@ -433,40 +433,6 @@ h1 {
 .featured {
   margin-top: 0;
   margin-bottom: var(--section-gap);
-}
-
-.home-bio {
-  width: 0;
-  min-width: 100%;
-  margin-top: 4rem;
-  margin-bottom: 24rem;
-}
-
-.home-bio-content {
-  width: 100%;
-}
-
-.home-bio-content h1,
-.home-bio-content h2 {
-  margin: 0 0 1rem;
-  text-align: left;
-  font-family: Arial, sans-serif;
-  font-size: clamp(1.5rem, 3.2vw, 2rem);
-  line-height: 1.25;
-  width: 100%;
-}
-
-.home-bio-lead {
-  margin: 0 0 1rem;
-  font-size: clamp(1.02rem, 2.2vw, 1.2rem);
-  font-weight: 600;
-  line-height: 1.45;
-}
-
-.home-bio-content p {
-  margin: 0 0 1rem;
-  line-height: 1.7;
-  width: 100%;
 }
 
 .reveal-on-scroll {
@@ -968,12 +934,6 @@ h1 {
   }
 }
 
-@media (max-width: 880px) and (min-width: 601px) {
-  .home-bio {
-    margin-bottom: 20rem;
-  }
-}
-
 /* ─── Mobile / narrow: sidebar overlay ─────────────────────── */
 @media (max-width: 880px) {
   .sidebar {
@@ -1049,11 +1009,6 @@ h1 {
   .page {
     --section-gap: 8rem;
     padding: var(--page-padding-block-start) 0 var(--section-gap);
-  }
-
-  .home-bio {
-    margin-top: 3rem;
-    margin-bottom: 14rem;
   }
 
   .experience-role {
