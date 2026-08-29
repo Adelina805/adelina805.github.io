@@ -104,7 +104,7 @@ h1 {
   flex: 1 1 auto;
   min-width: 0;
   width: min(1100px, 92%);
-  margin: 0 auto;
+  margin: 0 20px;
   --page-padding-block-start: 2rem;
   padding: var(--page-padding-block-start) 0 5rem;
 }
@@ -172,6 +172,8 @@ h1 {
   flex-direction: column;
   border: 0.5px solid var(--main-color);
   margin: 0;
+  padding: 20px 0;
+  gap: 10px;
 }
 
 .sidebar-nav a {
