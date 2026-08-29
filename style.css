@@ -1032,7 +1032,8 @@ h1 {
   }
 
   .experience-role {
-    /* Keep logo + title/org side-by-side; drop the GIF media to the next line. */
+    /* Keep logo + title/org side-by-side; GIF sits as a faint watermark behind text. */
+    position: relative;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -1040,33 +1041,37 @@ h1 {
   }
 
   .experience-role-logo {
+    position: relative;
+    z-index: 1;
     width: 38px;
     height: 38px;
     flex-basis: 38px;
   }
 
   .experience-role-content {
+    position: relative;
+    z-index: 1;
     flex: 1 1 200px;
   }
 
   .experience-role-head {
-    /* Title + org should align horizontally next to the logo on mobile. */
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.15rem 0.5rem;
-  }
-
-  .experience-dates {
-    /* Dates should remain below title + org. */
-    flex: 0 0 100%;
-    margin-top: 0.1rem;
+    /* Title, org, and dates always stack on separate lines. */
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 0.15rem 0;
   }
 
   .experience-role-media {
-    order: 3;
-    flex: 0 0 100%;
-    width: 100%;
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    z-index: 0;
+    width: 6.5rem;
+    flex: none;
+    opacity: 0.2;
+    background: transparent;
+    pointer-events: none;
   }
 
   .projects {
