@@ -964,7 +964,7 @@ h1 {
     position: fixed;
     inset: 0;
     z-index: 90;
-    background: color-mix(in srgb, var(--main-color) 25%, transparent);
+    background: var(--overlay-color);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.28s var(--interactive-ease);
