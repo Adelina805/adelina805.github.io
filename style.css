@@ -213,7 +213,7 @@ h1 {
 
 .home-hero-title {
   margin: 0.85rem 0 0;
-  font-size: clamp(1.25rem, 1vw + 1.0rem, 30px);
+  font-size: clamp(1.1rem, 2vw + 0.4rem, 30px);
   font-weight: 400;
   line-height: 1.4;
 }
@@ -454,7 +454,7 @@ h1 {
 }
 
 .featured {
-  margin-top: 20px;
+  margin-top: 6rem;
   margin-bottom: var(--section-gap);
 }
 
