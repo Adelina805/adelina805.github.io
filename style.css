@@ -50,7 +50,7 @@ body.dark {
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: Arial, sans-serif;
   background: linear-gradient(to bottom, #6898de 0%, #fafafa 100%) fixed;
   color: var(--main-color);
 }
@@ -72,7 +72,7 @@ button:focus-visible {
 }
 
 h1 {
-  font-family: Georgia, serif;
+  font-family: Arial, sans-serif;
   text-align: center;
 }
 
@@ -435,7 +435,7 @@ h1 {
 .about-content h2 {
   margin: 0 0 1rem;
   text-align: left;
-  font-family: Georgia, serif;
+  font-family: Arial, sans-serif;
   font-size: clamp(1.5rem, 3.2vw, 2rem);
   line-height: 1.25;
   width: 100%;
@@ -640,7 +640,7 @@ h1 {
 
 .section-header h2 {
   margin: 0;
-  font-family: Georgia, serif;
+  font-family: Arial, sans-serif;
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   font-weight: 400;
 }
