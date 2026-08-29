@@ -110,6 +110,17 @@ h1 {
   padding: var(--page-padding-block-start) 0 5rem;
 }
 
+/* Shared width: sizes to the hero layout; bio matches the same column. */
+.home-column {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.home-column .fold-hero {
+  width: 100%;
+}
+
 /* First screen: home fills the viewport so #featured starts below the fold. */
 .fold-hero {
   display: flex;
@@ -396,11 +407,38 @@ h1 {
   margin-bottom: 5rem;
 }
 
-#about.about-section {
-  margin-top: 5rem;
-  margin-bottom: 6rem;
-  flex: none;
-  align-items: start;
+.home-bio {
+  width: 0;
+  min-width: 100%;
+  margin-top: 4rem;
+  margin-bottom: 24rem;
+}
+
+.home-bio-content {
+  width: 100%;
+}
+
+.home-bio-content h1,
+.home-bio-content h2 {
+  margin: 0 0 1rem;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  line-height: 1.25;
+  width: 100%;
+}
+
+.home-bio-lead {
+  margin: 0 0 1rem;
+  font-size: clamp(1.02rem, 2.2vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.home-bio-content p {
+  margin: 0 0 1rem;
+  line-height: 1.7;
+  width: 100%;
 }
 
 .reveal-on-scroll {
@@ -487,92 +525,7 @@ h1 {
   display: none !important;
 }
 
-.about-section {
-  margin-top: 0;
-  padding-top: 0;
-  /* Grow with .fold-hero so short copy still pushes #featured below the first screen. */
-  flex: 1 1 auto;
-  margin-bottom: 6rem;
-  display: flex;
-  align-items: center;
-}
-
-.about-layout {
-  display: grid;
-  grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
-  gap: clamp(1.5rem, 3vw, 3rem);
-  /* Keep the portrait aligned to the top of the about block. */
-  align-items: start;
-}
-
-@media (min-width: 881px) {
-  .about-layout {
-    margin-top: -3rem;
-  }
-}
-
-.about-image-wrap {
-  width: 100%;
-  max-width: 360px;
-  line-height: 0;
-}
-
-.about-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  /* Fade the photo into the page background (body gradient shows through). */
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 calc(100% - 9rem),
-    rgba(0, 0, 0, 0.45) calc(100% - 3.5rem),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 calc(100% - 9rem),
-    rgba(0, 0, 0, 0.45) calc(100% - 3.5rem),
-    transparent 100%
-  );
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-
-.about-content {
-  /* Ensure the About heading/paragraphs span the full responsive column width. */
-  width: 100%;
-  max-width: none;
-}
-
-.about-content h1,
-.about-content h2 {
-  margin: 0 0 1rem;
-  text-align: left;
-  font-family: Arial, sans-serif;
-  font-size: clamp(1.5rem, 3.2vw, 2rem);
-  line-height: 1.25;
-  width: 100%;
-}
-
-.about-lead {
-  margin: 0 0 1rem;
-  font-size: clamp(1.02rem, 2.2vw, 1.2rem);
-  font-weight: 600;
-  line-height: 1.45;
-}
-
-.about-content p {
-  margin: 0 0 1rem;
-  line-height: 1.7;
-  width: 100%;
-}
-
 /* Anchor navigation: keep section headings comfortably visible. */
-#home,
 #about,
 #featured,
 #archive,
@@ -985,25 +938,11 @@ h1 {
     justify-content: flex-end;
     align-self: start;
   }
-
-  .about-layout {
-    grid-template-columns: 1fr;
-    /* More air between portrait and copy when the grid stacks (≤880px). */
-    gap: clamp(2rem, 5vw, 3rem);
-  }
-
-  .about-image-wrap {
-    max-width: 280px;
-    /* When stacked to a single column, center the portrait. */
-    justify-self: center;
-  }
 }
 
-/* Tablet portrait / narrow: extra rhythm between About and Featured (mobile sets its own about margins). */
 @media (max-width: 880px) and (min-width: 601px) {
-  /* Single margin avoids collapse with .featured; stronger rhythm than desktop 2rem. */
-  .about-section {
-    margin-bottom: 6.5rem;
+  .home-bio {
+    margin-bottom: 20rem;
   }
 }
 
@@ -1065,7 +1004,6 @@ h1 {
     margin: 0 20px;
   }
 
-  #home,
   #about,
   #featured,
   #archive,
@@ -1084,8 +1022,9 @@ h1 {
     padding: var(--page-padding-block-start) 0 5rem;
   }
 
-  .about-section {
-    margin-bottom: 4rem;
+  .home-bio {
+    margin-top: 3rem;
+    margin-bottom: 14rem;
   }
 
   .experience-role {
