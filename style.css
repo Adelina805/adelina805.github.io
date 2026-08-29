@@ -1111,16 +1111,6 @@ h1 {
     padding-bottom: 3rem;
   }
 
-  #archive-projects .project {
-    grid-template-columns: 40% minmax(0, 1fr);
-    grid-template-areas:
-      "thumb main"
-      "thumb links"
-      "thumb tags";
-    gap: 0.625rem 1rem;
-    align-items: start;
-  }
-
   .thumbnail {
     width: 100%;
     height: auto;
