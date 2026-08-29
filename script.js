@@ -176,51 +176,80 @@ function updateThemeToggleLabels(isDark, toggles) {
   }
 }
 
-// Mobile menu opens a simple vertical nav and closes on link click or viewport change.
+// Mobile sidebar opens off-canvas and closes on link click, backdrop, Escape, or resize.
 function setupMobileMenu() {
   const menuToggle = document.querySelector(".menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
+  const sidebar = document.getElementById("sidebar");
+  const backdrop = document.querySelector(".sidebar-backdrop");
 
-  if (!menuToggle || !mobileMenu) {
+  if (!menuToggle || !sidebar) {
     return;
   }
 
+  const mobileQuery = window.matchMedia("(max-width: 880px)");
   const shouldBlurOnTap =
     (typeof window.matchMedia === "function" &&
       (window.matchMedia("(pointer: coarse)").matches ||
         window.matchMedia("(hover: none)").matches)) ||
     "ontouchstart" in window;
 
-  menuToggle.addEventListener("click", () => {
-    const isOpen = mobileMenu.classList.toggle("is-open");
+  const setOpen = (isOpen) => {
+    sidebar.classList.toggle("is-open", isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));
     menuToggle.setAttribute(
       "aria-label",
-      isOpen ? "Close mobile menu" : "Open mobile menu",
+      isOpen ? "Close navigation menu" : "Open navigation menu",
     );
     menuToggle.setAttribute("title", isOpen ? "Close menu" : "Open menu");
-    // Prevent touch browsers from keeping a "hover" styling state.
+    document.body.classList.toggle("sidebar-open", isOpen);
+
+    if (backdrop) {
+      backdrop.classList.toggle("is-visible", isOpen);
+      backdrop.hidden = !isOpen;
+      backdrop.setAttribute("aria-hidden", String(!isOpen));
+    }
+  };
+
+  const closeMenu = () => setOpen(false);
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = !sidebar.classList.contains("is-open");
+    setOpen(isOpen);
     if (shouldBlurOnTap) menuToggle.blur();
   });
 
-  for (const link of mobileMenu.querySelectorAll("a")) {
+  if (backdrop) {
+    backdrop.addEventListener("click", closeMenu);
+  }
+
+  for (const link of sidebar.querySelectorAll(".sidebar-nav a")) {
     link.addEventListener("click", () => {
-      mobileMenu.classList.remove("is-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open mobile menu");
-      menuToggle.setAttribute("title", "Open menu");
-      if (shouldBlurOnTap) menuToggle.blur();
+      if (mobileQuery.matches) {
+        closeMenu();
+        if (shouldBlurOnTap) menuToggle.blur();
+      }
     });
   }
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 600 && mobileMenu.classList.contains("is-open")) {
-      mobileMenu.classList.remove("is-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open mobile menu");
-      menuToggle.setAttribute("title", "Open menu");
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && sidebar.classList.contains("is-open")) {
+      closeMenu();
+      menuToggle.focus();
     }
   });
+
+  const handleViewportChange = () => {
+    if (!mobileQuery.matches && sidebar.classList.contains("is-open")) {
+      closeMenu();
+    }
+  };
+
+  window.addEventListener("resize", handleViewportChange);
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", handleViewportChange);
+  } else if (typeof mobileQuery.addListener === "function") {
+    mobileQuery.addListener(handleViewportChange);
+  }
 }
 
 function setupArchiveFilters() {
@@ -262,30 +291,10 @@ function setupArchiveFilters() {
   applyFilter("all");
 }
 
-function setupFooterHearts() {
-  const hearts = document.querySelectorAll(".footer-heart");
-  if (!hearts.length) {
-    return;
-  }
-
-  for (const heart of hearts) {
-    heart.addEventListener("click", () => {
-      heart.classList.remove("is-bouncing");
-      void heart.offsetWidth;
-      heart.classList.add("is-bouncing");
-    });
-
-    heart.addEventListener("animationend", () => {
-      heart.classList.remove("is-bouncing");
-    });
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   ensureIconSprite();
   setupThemeToggle();
   setupMobileMenu();
-  setupFooterHearts();
   attachIcons();
   setupArchiveFilters();
   setupRevealOnScroll();
