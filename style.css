@@ -35,6 +35,8 @@ html {
   --interactive-ease: ease;
   --focus-ring: color-mix(in srgb, var(--main-color) 45%, transparent);
 
+  --sidebar-bg: color-mix(in srgb, #EFEFEF 20%, transparent);
+
   --project-main-col: 280px;
   /* Two pill links + gap; 240px was too tight for longer labels (e.g. repository + read post) */
   --project-links-col: 340px;
@@ -50,6 +52,7 @@ body.dark {
   --surface: color-mix(in srgb, var(--main-color) 12%, transparent);
   --surface-hover: color-mix(in srgb, var(--main-color) 10%, transparent);
   --surface-hover-soft: color-mix(in srgb, var(--main-color) 7%, transparent);
+  --sidebar-bg: color-mix(in srgb, #02114C 20%, transparent);
   background: linear-gradient(to bottom, #285596 0%, #000103 100%) fixed;
 }
 
@@ -126,7 +129,8 @@ h1 {
   display: flex;
   flex-direction: column;
   padding: 2.5rem 1.25rem 1.5rem;
-  background: color-mix(in srgb, var(--main-color) 20%, transparent);
+  background: var(--sidebar-bg);
+  border-right: 0.5px solid var(--main-color);
   z-index: 100;
 }
 
@@ -166,7 +170,7 @@ h1 {
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--main-color);
+  border: 0.5px solid var(--main-color);
   margin: 0;
 }
 
