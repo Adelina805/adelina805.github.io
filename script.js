@@ -176,6 +176,28 @@ function updateThemeToggleLabels(isDark, toggles) {
   }
 }
 
+// Home should reach the very top of the page, not the #about section offset.
+function setupHomeNav() {
+  const homeLink = document.querySelector('.sidebar-nav a[href="#top"]');
+  if (!homeLink) {
+    return;
+  }
+
+  homeLink.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+
+    if (location.hash !== "#top") {
+      history.pushState(null, "", "#top");
+    }
+  });
+}
+
 // Mobile sidebar opens off-canvas and closes on link click, backdrop, Escape, or resize.
 function setupMobileMenu() {
   const menuToggle = document.querySelector(".menu-toggle");
@@ -294,6 +316,7 @@ function setupArchiveFilters() {
 document.addEventListener("DOMContentLoaded", () => {
   ensureIconSprite();
   setupThemeToggle();
+  setupHomeNav();
   setupMobileMenu();
   attachIcons();
   setupArchiveFilters();
