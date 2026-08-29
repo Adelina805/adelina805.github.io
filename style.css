@@ -959,6 +959,10 @@ h1 {
     opacity: 1;
   }
 
+  body.sidebar-open .menu-toggle {
+    display: none;
+  }
+
   .sidebar-backdrop {
     display: block;
     position: fixed;
