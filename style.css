@@ -18,6 +18,10 @@ html {
     transition: none;
     pointer-events: auto;
   }
+
+  .sidebar-star {
+    animation: none;
+  }
 }
 
 :root {
@@ -237,12 +241,35 @@ h1 {
 }
 
 .sidebar-name {
+  position: relative;
   margin: 0;
   line-height: 1.05;
 }
 
+.sidebar-star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  color: var(--main-color);
+  opacity: 0.3;
+  font-size: 70px;
+  line-height: 1;
+  pointer-events: none;
+  transform: translate(calc(-50% + 83px), calc(-50% - 13px));
+  animation: sidebar-star-spin 24s linear infinite;
+}
+
+@keyframes sidebar-star-spin {
+  to {
+    transform: translate(calc(-50% + 83px), calc(-50% - 13px)) rotate(-360deg);
+  }
+}
+
 .sidebar-name-first,
 .sidebar-name-last {
+  position: relative;
+  z-index: 1;
   display: block;
 }
 
