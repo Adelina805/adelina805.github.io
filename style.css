@@ -104,8 +104,8 @@ h1 {
 .page {
   flex: 1 1 auto;
   min-width: 0;
-  width: min(1100px, 92%);
-  margin: 0 20px;
+  width: auto;
+  margin: 0 40px;
   --page-padding-block-start: 2rem;
   padding: var(--page-padding-block-start) 0 5rem;
 }
@@ -1062,6 +1062,7 @@ h1 {
   .page {
     --page-padding-block-start: 3.75rem;
     width: min(1100px, 92%);
+    margin: 0 20px;
   }
 
   #home,
