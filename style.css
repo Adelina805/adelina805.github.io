@@ -415,6 +415,9 @@ h1 {
   .menu-toggle:hover {
     opacity: 1;
     border-color: var(--border-soft);
+  }
+
+  .theme-toggle:hover {
     background-color: var(--surface-hover-soft);
   }
 }
@@ -984,6 +987,7 @@ h1 {
     width: 42px;
     height: 42px;
     opacity: 1;
+    background: var(--surface);
   }
 
   body.sidebar-open .menu-toggle {
