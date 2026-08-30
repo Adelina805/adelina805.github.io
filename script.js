@@ -303,6 +303,75 @@ function setupMobileMenu() {
   }
 }
 
+// Highlight the sidebar link for the section currently in view.
+function setupScrollSpy() {
+  const nav = document.querySelector(".sidebar-nav");
+  if (!nav) {
+    return;
+  }
+
+  const items = Array.from(nav.querySelectorAll('a[href^="#"]'))
+    .map((link) => {
+      const id = decodeURIComponent(link.hash.slice(1));
+      const target = document.getElementById(id);
+      return target ? { link, target } : null;
+    })
+    .filter(Boolean);
+
+  if (!items.length) {
+    return;
+  }
+
+  const setActive = (activeLink) => {
+    for (const { link } of items) {
+      if (link === activeLink) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    }
+  };
+
+  const updateFromScroll = () => {
+    const spyLine = Math.max(96, Math.round(window.innerHeight * 0.22));
+    const scrollBottom = window.innerHeight + window.scrollY;
+    const docHeight = document.documentElement.scrollHeight;
+    const atBottom = scrollBottom >= docHeight - 4;
+
+    if (atBottom) {
+      setActive(items[items.length - 1].link);
+      return;
+    }
+
+    let current = items[0];
+    for (const item of items) {
+      if (item.target.getBoundingClientRect().top <= spyLine) {
+        current = item;
+      }
+    }
+
+    setActive(current.link);
+  };
+
+  let ticking = false;
+  const onScrollOrResize = () => {
+    if (ticking) {
+      return;
+    }
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateFromScroll();
+      ticking = false;
+    });
+  };
+
+  window.addEventListener("scroll", onScrollOrResize, { passive: true });
+  window.addEventListener("resize", onScrollOrResize);
+  window.addEventListener("hashchange", updateFromScroll);
+  window.addEventListener("load", updateFromScroll);
+  updateFromScroll();
+}
+
 function setupArchiveFilters() {
   const projectsRoot = document.getElementById("archive-projects");
   const filterRoot = document.querySelector(".archive-filters");
@@ -346,6 +415,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ensureIconSprite();
   setupThemeToggle();
   setupHomeNav();
+  setupScrollSpy();
   setupMobileMenu();
   attachIcons();
   setupArchiveFilters();
