@@ -264,8 +264,13 @@ h1 {
 
 .sidebar-name {
   position: relative;
+  display: block;
   margin: 0;
   line-height: 1.05;
+  color: inherit;
+  text-decoration: none;
+  cursor: default;
+  pointer-events: none;
 }
 
 .sidebar-star {
@@ -998,6 +1003,13 @@ h1 {
   .experience-dates {
     font-size: 0.78rem;
     letter-spacing: 0;
+  }
+
+  .sidebar-name {
+    cursor: pointer;
+    pointer-events: auto;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 

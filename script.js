@@ -176,26 +176,55 @@ function updateThemeToggleLabels(isDark, toggles) {
   }
 }
 
+function scrollToPageTop(event) {
+  event.preventDefault();
+
+  const reduceMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+
+  if (location.hash !== "#top") {
+    history.pushState(null, "", "#top");
+  }
+}
+
 // Home should reach the very top of the page, not the #about section offset.
+// The sidebar name is a mobile-only shortcut to the same action.
 function setupHomeNav() {
   const homeLink = document.querySelector('.sidebar-nav a[href="#top"]');
-  if (!homeLink) {
+  const nameLink = document.querySelector(".sidebar-name");
+  const mobileQuery = window.matchMedia("(max-width: 880px)");
+
+  if (homeLink) {
+    homeLink.addEventListener("click", scrollToPageTop);
+  }
+
+  if (!nameLink) {
     return;
   }
 
-  homeLink.addEventListener("click", (event) => {
-    event.preventDefault();
+  const syncNameLink = () => {
+    nameLink.tabIndex = mobileQuery.matches ? 0 : -1;
+  };
 
-    const reduceMotion =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  syncNameLink();
 
-    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
-
-    if (location.hash !== "#top") {
-      history.pushState(null, "", "#top");
+  nameLink.addEventListener("click", (event) => {
+    if (!mobileQuery.matches) {
+      event.preventDefault();
+      return;
     }
+
+    scrollToPageTop(event);
   });
+
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", syncNameLink);
+  } else if (typeof mobileQuery.addListener === "function") {
+    mobileQuery.addListener(syncNameLink);
+  }
 }
 
 // Mobile sidebar opens off-canvas and closes on link click, backdrop, Escape, or resize.
@@ -244,7 +273,7 @@ function setupMobileMenu() {
     backdrop.addEventListener("click", closeMenu);
   }
 
-  for (const link of sidebar.querySelectorAll(".sidebar-nav a")) {
+  for (const link of sidebar.querySelectorAll(".sidebar-nav a, .sidebar-name")) {
     link.addEventListener("click", () => {
       if (mobileQuery.matches) {
         closeMenu();
