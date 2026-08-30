@@ -892,7 +892,7 @@ h1 {
 .project-tags span {
   border: 1px solid var(--border-soft);
   padding: 0.35rem 0.6rem;
-  opacity: 0.8;
+  color: color-mix(in srgb, var(--main-color) 65%, transparent);
   font-size: clamp(0.813rem, 1.2vw, 0.875rem);
 }
 
