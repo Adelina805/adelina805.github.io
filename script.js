@@ -429,31 +429,30 @@ function setupFeaturedVideos() {
     return;
   }
 
-  const tryPlay = (video) => {
+  const prepare = (video) => {
     video.muted = true;
+    video.defaultMuted = true;
     video.playsInline = true;
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {});
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("preload", "auto");
+    if ("disableRemotePlayback" in video) {
+      video.disableRemotePlayback = true;
     }
   };
 
-  for (const video of videos) {
-    video.muted = true;
-    video.playsInline = true;
-    video.setAttribute("webkit-playsinline", "");
-
-    video.addEventListener("loadeddata", () => {
-      if (video.dataset.inView === "true") {
-        tryPlay(video);
+  const tryPlay = (video) => {
+    prepare(video);
+    if (video.paused) {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
       }
-    });
-  }
-
-  const syncVisibility = () => {
-    if (document.hidden) {
-      return;
     }
+  };
+
+  const playVisible = () => {
     for (const video of videos) {
       if (video.dataset.inView === "true") {
         tryPlay(video);
@@ -461,7 +460,44 @@ function setupFeaturedVideos() {
     }
   };
 
-  document.addEventListener("visibilitychange", syncVisibility);
+  for (const video of videos) {
+    prepare(video);
+
+    video.addEventListener("loadeddata", () => {
+      if (video.dataset.inView === "true") {
+        tryPlay(video);
+      }
+    });
+
+    video.addEventListener("canplay", () => {
+      if (video.dataset.inView === "true") {
+        tryPlay(video);
+      }
+    });
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      playVisible();
+    }
+  });
+
+  // iOS Low Power Mode / strict autoplay: unlock on first user gesture.
+  const unlockOnGesture = () => {
+    playVisible();
+    document.removeEventListener("touchstart", unlockOnGesture, true);
+    document.removeEventListener("click", unlockOnGesture, true);
+    document.removeEventListener("scroll", unlockOnGesture, true);
+  };
+  document.addEventListener("touchstart", unlockOnGesture, {
+    capture: true,
+    passive: true,
+  });
+  document.addEventListener("click", unlockOnGesture, true);
+  document.addEventListener("scroll", unlockOnGesture, {
+    capture: true,
+    passive: true,
+  });
 
   if (!("IntersectionObserver" in window)) {
     for (const video of videos) {
@@ -484,7 +520,7 @@ function setupFeaturedVideos() {
         }
       }
     },
-    { threshold: 0.25 },
+    { threshold: 0.15, rootMargin: "40px 0px" },
   );
 
   for (const video of videos) {

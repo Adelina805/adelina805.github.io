@@ -751,6 +751,14 @@ h1 {
   display: block;
 }
 
+.featured-thumbnail::-webkit-media-controls {
+  display: none !important;
+}
+
+.featured-thumbnail::-webkit-media-controls-start-playback-button {
+  display: none !important;
+}
+
 .featured-content {
   display: grid;
   gap: 0.875rem;
