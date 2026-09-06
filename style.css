@@ -745,7 +745,7 @@ h1 {
 .featured-thumbnail {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
   background: var(--surface);
   object-fit: cover;
   display: block;
