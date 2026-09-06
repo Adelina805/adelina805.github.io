@@ -411,6 +411,87 @@ function setupArchiveFilters() {
   applyFilter("all");
 }
 
+function setupFeaturedVideos() {
+  const videos = document.querySelectorAll("video.featured-thumbnail");
+  if (!videos.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  if (prefersReducedMotion) {
+    for (const video of videos) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    }
+    return;
+  }
+
+  const tryPlay = (video) => {
+    video.muted = true;
+    video.playsInline = true;
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {});
+    }
+  };
+
+  for (const video of videos) {
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute("webkit-playsinline", "");
+
+    video.addEventListener("loadeddata", () => {
+      if (video.dataset.inView === "true") {
+        tryPlay(video);
+      }
+    });
+  }
+
+  const syncVisibility = () => {
+    if (document.hidden) {
+      return;
+    }
+    for (const video of videos) {
+      if (video.dataset.inView === "true") {
+        tryPlay(video);
+      }
+    }
+  };
+
+  document.addEventListener("visibilitychange", syncVisibility);
+
+  if (!("IntersectionObserver" in window)) {
+    for (const video of videos) {
+      video.dataset.inView = "true";
+      tryPlay(video);
+    }
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.dataset.inView = "true";
+          tryPlay(video);
+        } else {
+          video.dataset.inView = "false";
+          video.pause();
+        }
+      }
+    },
+    { threshold: 0.25 },
+  );
+
+  for (const video of videos) {
+    observer.observe(video);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   ensureIconSprite();
   setupThemeToggle();
@@ -420,4 +501,5 @@ document.addEventListener("DOMContentLoaded", () => {
   attachIcons();
   setupArchiveFilters();
   setupRevealOnScroll();
+  setupFeaturedVideos();
 });
