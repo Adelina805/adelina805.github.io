@@ -108,6 +108,18 @@ function setupRevealOnScroll() {
   const show = (el) => {
     el.classList.add("is-visible");
     el.classList.remove("reveal-pending");
+
+    // Safari blocks autoplay while opacity:0; kick featured videos once shown.
+    if (el.id === "featured") {
+      for (const video of el.querySelectorAll("video.featured-thumbnail")) {
+        video.muted = true;
+        video.playsInline = true;
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {});
+        }
+      }
+    }
   };
 
   // No IntersectionObserver: show all immediately (older browsers).
@@ -412,7 +424,9 @@ function setupArchiveFilters() {
 }
 
 function setupFeaturedVideos() {
-  const videos = document.querySelectorAll("video.featured-thumbnail");
+  const videos = Array.from(
+    document.querySelectorAll("video.featured-thumbnail"),
+  );
   if (!videos.length) {
     return;
   }
@@ -432,11 +446,15 @@ function setupFeaturedVideos() {
   const prepare = (video) => {
     video.muted = true;
     video.defaultMuted = true;
+    video.autoplay = true;
+    video.loop = true;
     video.playsInline = true;
     video.setAttribute("muted", "");
+    video.setAttribute("autoplay", "");
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
     video.setAttribute("preload", "auto");
+    video.removeAttribute("controls");
     if ("disableRemotePlayback" in video) {
       video.disableRemotePlayback = true;
     }
@@ -444,52 +462,71 @@ function setupFeaturedVideos() {
 
   const tryPlay = (video) => {
     prepare(video);
-    if (video.paused) {
-      const playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => {});
-      }
+    if (!video.paused && !video.ended) {
+      return;
+    }
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {});
     }
   };
 
-  const playVisible = () => {
+  const playAll = () => {
     for (const video of videos) {
-      if (video.dataset.inView === "true") {
-        tryPlay(video);
-      }
+      tryPlay(video);
+    }
+  };
+
+  // Safari/Chrome refuse autoplay while ancestors are opacity:0 (reveal-pending).
+  const featuredSection = document.getElementById("featured");
+  const sectionIsShown = () => {
+    if (!featuredSection) {
+      return true;
+    }
+    if (featuredSection.classList.contains("reveal-pending")) {
+      return false;
+    }
+    return (
+      featuredSection.classList.contains("is-visible") ||
+      !featuredSection.classList.contains("reveal-on-scroll")
+    );
+  };
+
+  const playIfShown = () => {
+    if (sectionIsShown()) {
+      playAll();
     }
   };
 
   for (const video of videos) {
     prepare(video);
+    video.addEventListener("loadeddata", playIfShown);
+    video.addEventListener("canplay", playIfShown);
+  }
 
-    video.addEventListener("loadeddata", () => {
-      if (video.dataset.inView === "true") {
-        tryPlay(video);
-      }
-    });
-
-    video.addEventListener("canplay", () => {
-      if (video.dataset.inView === "true") {
-        tryPlay(video);
-      }
+  if (featuredSection) {
+    const revealObserver = new MutationObserver(playIfShown);
+    revealObserver.observe(featuredSection, {
+      attributes: true,
+      attributeFilter: ["class"],
     });
   }
 
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
-      playVisible();
+      playIfShown();
     }
   });
 
-  // iOS Low Power Mode / strict autoplay: unlock on first user gesture.
+  // Low Power Mode / strict policies: unlock after any gesture.
   const unlockOnGesture = () => {
-    playVisible();
-    document.removeEventListener("touchstart", unlockOnGesture, true);
-    document.removeEventListener("click", unlockOnGesture, true);
-    document.removeEventListener("scroll", unlockOnGesture, true);
+    playAll();
   };
   document.addEventListener("touchstart", unlockOnGesture, {
+    capture: true,
+    passive: true,
+  });
+  document.addEventListener("touchend", unlockOnGesture, {
     capture: true,
     passive: true,
   });
@@ -499,33 +536,16 @@ function setupFeaturedVideos() {
     passive: true,
   });
 
-  if (!("IntersectionObserver" in window)) {
-    for (const video of videos) {
-      video.dataset.inView = "true";
-      tryPlay(video);
+  let attempts = 0;
+  const retryId = window.setInterval(() => {
+    playIfShown();
+    attempts += 1;
+    if (attempts >= 40 || videos.every((v) => !v.paused)) {
+      window.clearInterval(retryId);
     }
-    return;
-  }
+  }, 250);
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        const video = entry.target;
-        if (entry.isIntersecting) {
-          video.dataset.inView = "true";
-          tryPlay(video);
-        } else {
-          video.dataset.inView = "false";
-          video.pause();
-        }
-      }
-    },
-    { threshold: 0.15, rootMargin: "40px 0px" },
-  );
-
-  for (const video of videos) {
-    observer.observe(video);
-  }
+  playIfShown();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
